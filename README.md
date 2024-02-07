@@ -1,1 +1,1 @@
-# discord_bot
+# codebattle_chat_bot
