@@ -1,7 +1,7 @@
-node_env: 'delelopment'
+node_env: 'development'
 bot_port: 5000
 bot_codebattle_socket_token: 'chat_bot'
-bot_codebattle_socket_url: 'ws://localhost:4000/chat_bot'
+bot_codebattle_socket_url: 'ws://localhost:4002/chat_bot'
 codebattle_db_name: 'codebattle_dev'
 codebattle_db_hostname: 'db'
 codebattle_db_username: 'postgres'
