@@ -1,8 +1,4 @@
-define GetFromPkg
-	$(shell node -p "require('./package.json').$(1)")
-endef
-
-BOT_VERSION := $(call GetFromPkg,version)
+BOT_VERSION := $(shell jq -r .version package.json)
 
 setup: setup-env compose-setup
 
@@ -12,15 +8,18 @@ setup-env:
 setup-env-local:
 	ansible-playbook ansible/development.yml -i ansible/development -vv
 
-docker-build-bot:
-	docker pull codebattle/chat:latest || true
-	docker build --target bot-image \
-				--cache-from=codebattle/chat:$(BOT_VERSION) \
-				--cache-from=codebattle/chat:latest \
+docker-build:
+	docker pull codebattle/chat_bot:latest || true
+	docker build \
+				--cache-from=codebattle/chat_bot:$(BOT_VERSION) \
+				--cache-from=codebattle/chat_bot:latest \
 				--file Dockerfile \
-				--tag codebattle/chat:latest app \
-				--tag codebattle/chat:$(BOT_VERSION)
+				--tag codebattle/chat_bot:$(BOT_VERSION) \
+				--tag codebattle/chat_bot:latest .
 
-docker-push-bot:
-	docker push codebattle/chat:$(BOT_VERSION)
-	docker push codebattle/chat:latest
+docker-push:
+	docker push codebattle/chat_bot:$(BOT_VERSION)
+	docker push codebattle/chat_bot:latest
+
+start:
+	yarn run start:health & yarn run start

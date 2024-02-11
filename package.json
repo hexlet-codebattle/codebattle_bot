@@ -4,7 +4,9 @@
   "description": "Codebattle bot for subscribe Games/Tournaments updates in real time and create/join battles with another users",
   "main": "app/index.js",
   "scripts": {
-    "start": "babel-node app/index.js",
+    "start": "node dist/index.js",
+    "start:health": "node dist/health.js",
+    "build": "babel app -d dist",
     "prettier": "prettier --write app/**/*.js",
     "lint": "eslint --cache --debug app/",
     "lint:write": "eslint --write app/**/*.js",
@@ -31,13 +33,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.23.9",
-    "@babel/eslint-parser": "^7.23.10",
-    "@babel/node": "^7.23.9",
-    "@babel/plugin-transform-runtime": "^7.23.9",
-    "@babel/preset-env": "^7.23.9",
-    "babel-jest": "^29.7.0",
-    "babel-plugin-lodash": "^3.3.4",
     "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.29.1",
@@ -48,6 +43,14 @@
     "prettier": "^3.2.5"
   },
   "dependencies": {
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.23.9",
+    "@babel/eslint-parser": "^7.23.10",
+    "@babel/node": "^7.23.9",
+    "@babel/plugin-transform-runtime": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "babel-jest": "^29.7.0",
+    "babel-plugin-lodash": "^3.3.4",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.1",
     "knex": "^3.1.0",

@@ -1,15 +1,14 @@
 import { config } from 'dotenv';
+import { WebSocket } from 'ws';
 import { Socket } from 'phoenix';
 import logger from '../logger';
-import { WebSocket } from 'ws';
 
 const connectionLogger = logger.child({ source: 'socket_connection' });
-
-global.WebSocket = WebSocket;
 
 config();
 
 const socket = new Socket(process.env.BOT_CODEBATTLE_SOCKET_URL, {
+  transport: WebSocket,
   params: {
     user_token: process.env.BOT_CODEBATTLE_SOCKET_TOKEN,
   },
