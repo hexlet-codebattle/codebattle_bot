@@ -1,0 +1,68 @@
+name: Build main
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    if: github.repository == 'hexlet-codebattle/codebattle-bot'
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:12-alpine
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::${yarn cache dir}"
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install yarn dependencies
+        run: yarn install --froze-lockfile
+
+      - name: Eslint
+        run: yarn lint
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.3
+        with:
+          prettier_options: --write **/*.{js,md}
+
+      - name: Run jest
+        run: yarn test
+
+      # - name: Setup db
+
+      - name: Login to Docker Hub
+        run: echo "${{ services.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --pasword-stdin
+
+      - name: Build docker image for codebattle bot
+        run: make docker-build-chat-bot
+      - name: Push docker image for codebattle bot
+        run: make docker-push-chat-bot
+
+      # - name:
+      #   run:
+      #   uses:
+      #   with:
