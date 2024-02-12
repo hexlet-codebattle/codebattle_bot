@@ -8,7 +8,7 @@
     "start:health": "node dist/health.js",
     "build": "babel app -d dist",
     "prettier": "prettier --write app/**/*.js",
-    "lint": "eslint --cache --debug app/",
+    "lint": "eslint --cache app/",
     "lint:write": "eslint --write app/**/*.js",
     "setup": "yarn",
     "prepare": "husky",

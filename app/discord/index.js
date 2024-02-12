@@ -5,7 +5,6 @@ import logger from '../logger';
 import socket from '../socket';
 
 import commands from './commands';
-import { intersection } from 'lodash';
 
 // https://github.com/discordjs/discord.js/tree/main/packages/discord.js#readme
 
@@ -51,7 +50,7 @@ const setup = (params) => {
     if (!interaction.isChatInputCommand()) return;
 
     const callback = commands[interaction.commandName]?.callback || noop;
-    callback(intersection);
+    callback(interaction);
   });
 
   client.login(token);

@@ -24,8 +24,7 @@ socket.onOpen(() => {
 socket.onError((err) => {
   logger.error(
     `Socket connection with codebattle server is closed with error: ${JSON.stringify(
-      err,
-      null,
+      err, null,
       2,
     )}`,
   );
