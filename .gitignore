@@ -22,6 +22,7 @@ tags
 .vagrant
 .terraform
 .cache-loader
+.eslintcache
 secrets.auto.tfvars
 *.secret.yml
 stats.json
