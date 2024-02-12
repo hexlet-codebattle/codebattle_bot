@@ -19,7 +19,7 @@
   "license": "MIT",
   "private": false,
   "engines": {
-    "node": ">=20.2.0"
+    "node": ">=18.19.0"
   },
   "husky": {
     "hooks": {
