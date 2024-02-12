@@ -6,7 +6,7 @@ on:
       - main
 jobs:
   build:
-    if: github.repository == 'hexlet-codebattle/codebattle-bot'
+    if: github.repository == 'hexlet-codebattle/codebattle_bot'
     runs-on: ubuntu-latest
 
     services:
