@@ -14,6 +14,9 @@
     "prepare": "husky",
     "test": "jest"
   },
+  "jest": {
+    "verbose": true
+  },
   "repository": "git@github.com:hexlet-codebattle/codebattle_bot",
   "author": "ReDBrother <bataevdmitriy@gmail.com>",
   "license": "MIT",
